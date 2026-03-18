@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Search, Info, Trash2, AlertCircle, Volume2, Globe } from 'lucide-react'; // ← 必要なアイコンを {} で囲む
 import * as wanakana from 'wanakana';
 import Fuse from 'fuse.js';
