@@ -799,24 +799,23 @@ const getCategoryIcon = (category) => {
                 </div>
                 <div className="mt-3 bg-slate-50 rounded-lg p-3 relative">
                   <div className="mt-1 space-y-1">
-                    <div className="flex flex-wrap">
-                      <span className={`inline-flex items-start gap-2 px-3 py-2 rounded-2xl text-sm font-bold border-2 max-w-full ${getCategoryColor(item.category)}`}>
-                          <div className="flex-shrink-0 mt-0.5">
-                            {getCategoryIcon(item.category)}
-                          </div>
-                          <span className="leading-tight break-words whitespace-normal">
-                            {item.category}
-                          </span>
-                        </span>
+                    <div className="flex flex-col gap-2">
+                     {/* ラベルの外枠。max-w-full を追加して親の幅を超えないように指定 */}
+                      <div className={`inline-flex items-start gap-2 px-3 py-2 rounded-xl border-2 font-bold text-sm w-fit max-w-full ${getCategoryColor(item.category)}`}>
+                     {/* アイコン： flex-shrink-0 で、文字に押されても形を保つように固定 */}
+                        <div className="flex-shrink-0 mt-0.5">
+                          {getCategoryIcon(item.category)}
+                        </div>
+                        
+                      {/* テキスト： whitespace-nowrap を削除！ break-words で枠内で折り返す */}
+                      <span className="leading-tight break-words whitespace-normal">
+                        {item.category}
+                      </span>
                     </div>
-                    {item.note && <div className="text-lg text-slate-700 leading-relaxed break-words">{item.note}</div>}
-                  </div>
+                    {item.note && <p className="text-slate-600 text-sm mt-1 break-words">{item.note}</p>}
                 </div>
               </div>
-            </div>
-          </div>
         ))}
-      </div>
     ) : (
       <div className="text-center py-12 bg-white rounded-2xl border border-dashed border-slate-200 text-slate-400" role="status" aria-live="polite">
         見つかりませんでした
