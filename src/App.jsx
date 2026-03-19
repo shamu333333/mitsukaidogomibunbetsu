@@ -800,20 +800,20 @@ const getCategoryIcon = (category) => {
                 <div className="mt-3 bg-slate-50 rounded-lg p-3 relative">
                   <div className="mt-1 space-y-1">
                     <div className="flex flex-col gap-2">
-                     {/* ラベルの外枠。max-w-full を追加して親の幅を超えないように指定 */}
-                      <div className={`inline-flex items-start gap-2 px-3 py-2 rounded-xl border-2 font-bold text-sm w-fit max-w-full ${getCategoryColor(item.category)}`}>
-                     {/* アイコン： flex-shrink-0 で、文字に押されても形を保つように固定 */}
-                        <div className="flex-shrink-0 mt-0.5">
-                          {getCategoryIcon(item.category)}
-                        </div>
-                      
-                      {/* テキスト： whitespace-nowrap を削除！ break-words で枠内で折り返す */}
-                      <span className="leading-tight break-words whitespace-normal">
+                     {/* ラベル部分： flex-wrap を追加して、さらに max-w-full で幅を制限 */}
+                      <div className={`inline-flex items-center gap-2 px-2 py-1.5 rounded-xl border-2 font-bold text-xs sm:text-sm w-fit max-w-[95%] ${getCategoryColor(item.category)}`}>
+                      {/* アイコン： 最小サイズを固定して、テキストに押されても形をキープ */}
+                      <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+      {getCategoryIcon(item.category)}
+                    </div>
+    
+                     {/* テキスト： whitespace-normal と break-all を追加して、どんなに長くても強制的に折り返す */}
+                      <span className="leading-tight whitespace-normal break-all">
                         {item.category}
                       </span>
                     </div>
-                    {item.note && <p className="text-slate-600 text-sm mt-1 break-words">{item.note}</p>}
-                </div>
+                    {item.note && <p className="text-slate-600 text-xs mt-1 break-words leading-relaxed">{item.note}</p>}
+                  </div>
               </div>
         ))}
     ) : (
