@@ -800,12 +800,16 @@ const getCategoryIcon = (category) => {
                 <div className="mt-3 bg-slate-50 rounded-lg p-3 relative">
                   <div className="mt-1 space-y-1">
                     <div>
-                      <span className={`inline-flex items-center gap-2 px-6 py-2 rounded-full text-base font-bold border-2 whitespace-nowrap min-w-max ${getCategoryColor(item.category)}`}>
-                        {getCategoryIcon(item.category)} 
-                        {item.category}
-                      </span>
+                      <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-base font-bold border-2 ${getCategoryColor(item.category)}`}>
+                        <div className="flex-shrink-0">
+                          {getCategoryIcon(item.category)}
+                        </div>
+                        <span className="leading-tight">
+                          {item.category}
+                        </span>
+                    </span>
                     </div>
-                    {item.note && <div className="text-lg text-slate-700 leading-relaxed">{item.note}</div>}
+                    {item.note && <div className="text-lg text-slate-700 leading-relaxed break-words">{item.note}</div>}
                   </div>
                 </div>
               </div>
