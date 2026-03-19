@@ -806,7 +806,7 @@ const getCategoryIcon = (category) => {
                         <div className="flex-shrink-0 mt-0.5">
                           {getCategoryIcon(item.category)}
                         </div>
-                       // test
+                      
                       {/* テキスト： whitespace-nowrap を削除！ break-words で枠内で折り返す */}
                       <span className="leading-tight break-words whitespace-normal">
                         {item.category}
