@@ -807,8 +807,7 @@ const getCategoryIcon = (category) => {
                               </span>
                             </div>
                           </div>
-                          <div className="text-sm font-bold">{item.category}</div>
-                          {item.note && <p className="text-slate-600 text-sm mt-1">{item.note}</p>}
+                            {item.note && <p className="text-slate-600 text-sm mt-1">{item.note}</p>}
                         </div>
                       </div>
                     </div>
