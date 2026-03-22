@@ -685,7 +685,7 @@ const getCategoryIcon = (category) => {
   <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={22} />
   <input
     type="text"
-    placeholder="すてたい もの（れい：アイス）"
+    placeholder="すてたい ものの なまえ"
     className="w-full pl-12 pr-12 py-5 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all text-slate-900 font-bold text-base sm:text-lg md:text-xl"
     style={{ fontSize: '20px' }}
     value={searchTerm}
