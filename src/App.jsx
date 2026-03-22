@@ -630,7 +630,7 @@ const getCategoryIcon = (category) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 p-4 md:p-8 font-sans text-slate-900" style={{ paddingLeft: '20pt', paddingRight: '20pt' }}>
+    <div className="min-h-screen bg-slate-50 px-4 py-6 md:p-8 font-sans text-slate-900">
       <div className="max-w-3xl mx-auto">
         <header className="mb-8">
           <div className="text-center">
@@ -680,7 +680,7 @@ const getCategoryIcon = (category) => {
   <input
     type="text"
     placeholder="すてたい もの（れい：アイス）"
-    className="w-full pl-12 pr-12 py-5 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all text-slate-900 font-bold"
+    className="w-full pl-12 pr-12 py-5 border-2 border-slate-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-400 transition-all text-slate-900 font-bold text-base sm:text-lg md:text-xl"
     style={{ fontSize: '20px' }}
     value={searchTerm}
     onChange={(e) => {
@@ -746,6 +746,8 @@ const getCategoryIcon = (category) => {
     )}
   </div>
 </div>
+</header>
+
           <div className="mt-2 flex items-center justify-center gap-3">
             <div aria-live="polite" className="text-sm text-slate-500">{searchResults ? `${searchResults.length} 件` : ''}</div>
             {isSpeaking !== null && (
@@ -758,72 +760,62 @@ const getCategoryIcon = (category) => {
               </button>
             )}
           </div>
-        </header>
 
 <div className="bg-slate-100 p-8 mb-6 rounded-2xl">
-  <div className="mt-4">
-    {filteredData.length > 0 ? (
-      <div id="results-list" role="list" aria-live="polite" className="space-y-8">
-        {filteredData.map((item, index) => (
-          <div 
-            key={index} 
-            role="listitem"
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                speak(item, index);
-              }
-            }}
-            className={`p-6 rounded-2xl border border-slate-200 transition-all ${
-              isSpeaking === index ? 'ring-2 ring-blue-400 bg-blue-50' : 'bg-white'
-            }`} 
-            style={{ borderRadius: '6px' }}
-          >
-            <div className="flex items-start justify-between">
-              <div className="flex-grow">
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-bold text-2xl md:text-3xl">
-                    {/* ここは一旦 item.name にしておきます */}
-                    {item.name}
-                  </h3>
-                  <button 
-                    onClick={() => speak(item, index)}
-                    aria-label={`読み上げ: ${item.name}`}
-                    className={`p-1.5 rounded-full transition-colors ${
-                      isSpeaking === index ? 'bg-blue-600 text-white shadow-sm' : 'bg-slate-100 text-slate-500 hover:bg-blue-100'
-                    }`}
+          <div className="mt-4">
+            {filteredData.length > 0 ? (
+              <div id="results-list" role="list" aria-live="polite" className="space-y-8">
+                {filteredData.map((item, index) => (
+                  <div 
+                    key={index} 
+                    role="listitem"
+                    className={`p-6 rounded-2xl border border-slate-200 transition-all ${
+                      isSpeaking === index ? 'ring-2 ring-blue-400 bg-blue-50' : 'bg-white'
+                    }`} 
+                    style={{ borderRadius: '6px' }}
                   >
-                    <Volume2 size={18} />
-                  </button>
-                </div>
-                <div className="mt-3 bg-slate-50 rounded-lg p-3 relative">
-                  <div className="mt-1 space-y-1">
-                    <div className="flex flex-col gap-2">
-                     {/* ラベル部分： flex-wrap を追加して、さらに max-w-full で幅を制限 */}
-                      <div className={`inline-flex items-center gap-2 px-2 py-1.5 rounded-xl border-2 font-bold text-xs sm:text-sm w-fit max-w-[95%] ${getCategoryColor(item.category)}`}>
-                      {/* アイコン： 最小サイズを固定して、テキストに押されても形をキープ */}
-                      <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
-      {getCategoryIcon(item.category)}
-                    </div>
+                    <div className="flex items-start justify-between">
+                      <div className="flex-grow">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h3 className="font-bold text-2xl md:text-3xl">{item.name}</h3>
+                          <button 
+                            onClick={() => speak(item, index)}
+                            className={`p-1.5 rounded-full ${isSpeaking === index ? 'bg-blue-600 text-white' : 'bg-slate-100'}`}
+                          >
+                            <Volume2 size={18} />
+                          </button>
+                        </div>
+                        <div className="mt-3 bg-slate-50 rounded-lg p-3">
+                          <div className="flex flex-wrap gap-2 mb-2 w-full min-w-0">
+                            <div
+                              className={`inline-flex items-center gap-2 px-3 py-2 rounded-xl border-2 font-bold text-sm sm:text-base max-w-full ${getCategoryColor(item.category)}`}
+                            >
+                             {/* アイコンが潰れないように flex-shrink-0 を指定 */}
+                              <div className="flex-shrink-0 flex items-center justify-center">
+                                {getCategoryIcon(item.category)}
+                              </div>
     
-                     {/* テキスト： whitespace-normal と break-all を追加して、どんなに長くても強制的に折り返す */}
-                      <span className="leading-tight whitespace-normal break-all">
-                        {item.category}
-                      </span>
+                            {/* テキスト：はみ出る場合は折り返しを許可、または適切に省略 */}
+                              <span className="leading-tight break-words">
+                              {item.category}
+                              </span>
+                            </div>
+                          </div>
+                          <div className="text-sm font-bold">{item.category}</div>
+                          {item.note && <p className="text-slate-600 text-sm mt-1">{item.note}</p>}
+                        </div>
+                      </div>
                     </div>
-                    {item.note && <p className="text-slate-600 text-xs mt-1 break-words leading-relaxed">{item.note}</p>}
                   </div>
+                ))}
               </div>
-        ))}
-    ) : (
-      <div className="text-center py-12 bg-white rounded-2xl border border-dashed border-slate-200 text-slate-400" role="status" aria-live="polite">
-        見つかりませんでした
-      </div>
-    )}
-  </div>
-</div>
-
+            ) : (
+              <div className="text-center py-12 bg-white rounded-2xl border border-dashed border-slate-200 text-slate-400">
+                見つかりませんでした
+              </div>
+            )}
+          </div>
+        </div>
             <footer className="mt-12 mb-8 p-6 bg-white rounded-2xl border border-slate-200 shadow-sm text-slate-600 text-sm md:text-base">
             <div className="space-y-4 leading-relaxed">
             {/* 1. 出典・参考情報のセクション */}
