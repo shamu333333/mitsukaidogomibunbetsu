@@ -649,7 +649,7 @@ const getCategoryIcon = (category) => {
 <div className="w-full">
   <p className="text-sm text-slate-700 font-bold mb-1 ml-1">ごみの しゅるいを えらぶ</p>
   
-  <div className="flex items-center gap-3">
+  <div className="flex items-center gap-2 w-full min-w-0 px-2">
     {/* 【追加】左側に現在選んでいるカテゴリーのアイコンを表示 */}
     <div className={`p-2 rounded-xl border-2 flex items-center justify-center bg-white ${getCategoryColor(selectedCategory)}`} style={{ minWidth: '60px', minHeight: '60px' }}>
       {getCategoryIcon(selectedCategory)}
@@ -658,7 +658,7 @@ const getCategoryIcon = (category) => {
     {/* セレクトボックス本体 */}
     <select
       aria-label="カテゴリ絞り込み"
-      className={`flex-grow rounded-xl border-2 px-4 py-4 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all appearance-none text-slate-900 ${getCategoryColor(selectedCategory)}`}
+      className={`flex-grow min-w-0 rounded-xl border-2 px-4 py-4 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all appearance-none text-slate-900 ${getCategoryColor(selectedCategory)}`}
       style={{ fontSize: '18px', fontWeight: 'bold' }}
       value={selectedCategory}
       onChange={(e) => setSelectedCategory(e.target.value)}
