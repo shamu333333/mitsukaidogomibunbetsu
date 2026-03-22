@@ -646,29 +646,35 @@ const getCategoryIcon = (category) => {
 <div className="mt-4 flex flex-col gap-4 bg-white p-5 rounded-2xl shadow-sm relative z-50">
   
   {/* 1段目：カテゴリー選択（幅を100%にして文字切れを防ぐ） */}
-<div className="w-full">
+<div className="w-full min-w-0">
   <p className="text-sm text-slate-700 font-bold mb-1 ml-1">ごみの しゅるいを えらぶ</p>
   
-  <div className="flex items-center gap-2 w-full min-w-0 px-2">
-    {/* 【追加】左側に現在選んでいるカテゴリーのアイコンを表示 */}
-    <div className={`p-2 rounded-xl border-2 flex items-center justify-center bg-white ${getCategoryColor(selectedCategory)}`} style={{ minWidth: '60px', minHeight: '60px' }}>
+ <div className="flex items-center gap-2 w-full min-w-0">
+    {/* アイコン部分：固定幅（flex-shrink-0）にして潰れないようにする */}
+    <div className={`flex-shrink-0 p-2 rounded-xl border-2 flex items-center justify-center bg-white ${getCategoryColor(selectedCategory)}`} style={{ width: '60px', height: '60px' }}>
       {getCategoryIcon(selectedCategory)}
     </div>
 
-    {/* セレクトボックス本体 */}
-    <select
-      aria-label="カテゴリ絞り込み"
-      className={`flex-grow min-w-0 rounded-xl border-2 px-4 py-4 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all appearance-none text-slate-900 ${getCategoryColor(selectedCategory)}`}
-      style={{ fontSize: '18px', fontWeight: 'bold' }}
-      value={selectedCategory}
-      onChange={(e) => setSelectedCategory(e.target.value)}
-    >
-      {categories.map(cat => (
-        <option key={cat} value={cat} className="bg-white text-slate-900">
-          {cat}
-        </option>
-      ))}
-    </select>
+    {/* セレクトボックス：w-full と min-w-0 を組み合わせて親の幅に収める */}
+    <div className="relative flex-grow min-w-0">
+      <select
+        aria-label="カテゴリ絞り込み"
+        className={`w-full rounded-xl border-2 pl-4 pr-10 py-4 focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all appearance-none text-slate-900 truncate ${getCategoryColor(selectedCategory)}`}
+        style={{ fontSize: '18px', fontWeight: 'bold' }}
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        {categories.map(cat => (
+          <option key={cat} value={cat} className="bg-white text-slate-900">
+            {cat}
+          </option>
+        ))}
+      </select>
+      {/* セレクトボックスの右矢印アイコン（自作） */}
+      <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+      </div>
+    </div>
   </div>
 </div>
 
