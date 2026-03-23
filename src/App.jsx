@@ -109,6 +109,7 @@ const categories = useMemo(() => {
       'そだいごみ',
       'ゆうがいごみ',
       'こがたかでん',
+      'こがたじゅうでんしきでんち',
       'しゅうしゅうできません'
     ];
     return order;
@@ -269,13 +270,16 @@ const getCategoryColor = (category) => {
     return 'bg-orange-100 text-orange-800 border-orange-300';
 
   case 'ゆうがいごみ': 
-    return 'bg-purple-100 text-purple-800 border-purple-300';
+    return 'bg-slate-200 text-slate-700 border-slate-300';
 
   case 'こがたかでん': 
     return 'bg-lime-100 text-lime-800 border-lime-300';
 
+  case 'こがたじゅうでんしきでんち':
+    return 'bg-lime-100 text-lime-800 border-lime-300';
+
   case 'しゅうしゅうできません': 
-    return 'bg-slate-200 text-slate-800 border-slate-400';
+    return 'bg-slate-50 text-slate-500 border-slate-200';
 
   default: 
     return 'bg-gray-100 text-gray-700 border-gray-300';
@@ -531,6 +535,25 @@ const getCategoryIcon = (category) => {
           <line x1="70" y1="85" x2="70" y2="92" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
         </svg>
       );
+      case 'ゆうがいごみ': // もしgomi.jsonが漢字なら「有害ごみ」に書き換えてください
+        return (
+          <svg width="36" height="36" viewBox="0 0 100 100" className="text-red-500" style={{ minWidth: '36px' }}>
+            {/* 電池の本体（外枠） */}
+            <rect x="30" y="25" width="40" height="60" rx="4" fill="none" stroke="currentColor" strokeWidth="6" />
+            
+            {/* 電池の先端（プラス極の突起） */}
+            <rect x="42" y="15" width="16" height="10" rx="2" fill="currentColor" />
+            
+            {/* 電池の中のライン（残量表示のようなデザイン） */}
+            <line x1="38" y1="45" x2="62" y2="45" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+            
+            {/* プラスマーク（＋） */}
+            <g stroke="currentColor" strokeWidth="6" strokeLinecap="round">
+              <line x1="50" y1="60" x2="50" y2="76" />
+              <line x1="42" y1="68" x2="58" y2="68" />
+            </g>
+          </svg>
+        );     
       case 'こがたかでん':
         return (
           <svg 
@@ -578,11 +601,43 @@ const getCategoryIcon = (category) => {
       >
         E-Waste
       </text>
-    </svg>
-);
+      </svg>
+      );
+case 'こがたじゅうでんしきでんち':
+        return (
+          <svg 
+            width="36" 
+            height="36" 
+            viewBox="-3 -2 30 30" // 左右上下の余白をさらに広げ、中央のマークを相対的に縮小
+            fill="none" 
+            stroke="currentColor" 
+            strokeWidth="1.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round"
+            className="text-lime-600"
+            style={{ minWidth: '36px' }}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* 高精度なリサイクルマークのパス */}
+            <path d="m18 12l2.5-1.5l2 3.5l-1.154 2.5m-6.513 4H19.5l1.846-4M16.5 23l-3-4.5l3-4.5m-1.667 2.5h6.513m-11.57.897l.05 2.915l-4.032-.018l-1.588-2.249m-.208-7.64l-2.333 4.041l2.541 3.599m-.208-7.64L1 10.598m2.998-.193l2.4-.155l1.065 2.155m0 0l1.331 2.693m-1.332-2.693l-3.256 5.64M9.5 7L7 5.5L9.5 2H12m6.56 4.092L16.5 2H12m0 0l3 5.545M12 7l5.5 1L20 3.5"/>
+            
+            <text 
+              x="12" 
+              y="28" // 位置をさらに下げました
+              fontSize="7" // フォントサイズをより小さく、シャープに
+              fontWeight="100" 
+              textAnchor="middle" 
+              fill="currentColor" 
+              stroke="none"
+              style={{ fontFamily: 'sans-serif' }}
+            >
+              Li-ion
+            </text>
+          </svg>
+        );
 
     // 【修正箇所】「すべて」のアイコン（ゴミ箱 + 虫眼鏡）
- case 'すべて':
+      case 'すべて':
       return (
         <svg
           width="40"
