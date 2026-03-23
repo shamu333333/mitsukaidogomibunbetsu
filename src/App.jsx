@@ -14,6 +14,12 @@ const App = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+const scrollToRules = () => {
+    const element = document.getElementById('rules-section');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // データは外部 JSON から取得する（存在しない場合は初期値をフォールバックとして使用）
   const initialTrashData = [
@@ -646,6 +652,15 @@ const getCategoryIcon = (category) => {
             <span style={{ display: 'inline-block' }}>けんさく　じてん</span>
             </h1>
             <p className="text-slate-500 text-sm">しなものの　なまえを　いれて、　ただしい　すてかたを　しらべましょう。</p>
+            <div className="mt-2 text-right max-w-2xl mx-auto">
+            <button 
+              onClick={scrollToRules}
+              className="text-sm text-blue-600 hover:underline flex items-center gap-1 ml-auto"
+              >
+                <Info size={14} />
+                この サイトに ついて
+            </button>
+            </div>
           </div>
 <div className="mt-4 flex flex-col gap-4 bg-white p-5 rounded-2xl shadow-sm relative z-50">
   
@@ -829,8 +844,10 @@ const getCategoryIcon = (category) => {
             <div className="space-y-4 leading-relaxed">
             {/* 1. 出典・参考情報のセクション */}
             <div>
-              <p className="font-bold text-slate-800 mb-2 text-lg">
-                この サイトの ルールに ついて
+              <p 
+              id="rules-section" // ★ここにIDを追加します
+              className="font-bold text-slate-800 mb-2 text-lg">
+                この サイトに ついて
               </p>
               <ul className="list-disc pl-5 space-y-3">
                 <li>
@@ -890,7 +907,7 @@ const getCategoryIcon = (category) => {
             </div>
           </div>
         </footer>
-{/* --- ここから書き換え（強制表示テスト用） --- */}
+
         <button
           onClick={scrollToTop}
           style={{
