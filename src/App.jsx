@@ -9,6 +9,11 @@ const App = () => {
   const [isSpeaking, setIsSpeaking] = useState(null);
   const [suggestions, setSuggestions] = useState([]);
   const [trashData, setTrashData] = useState([]);
+  const [showTopButton, setShowTopButton] = useState(true);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   // データは外部 JSON から取得する（存在しない場合は初期値をフォールバックとして使用）
   const initialTrashData = [
@@ -93,7 +98,6 @@ const categories = useMemo(() => {
       'しげんぶつ（ペットボトル）',
       'しげんぶつ（あきカン）',
       'しげんぶつ（あきビン）',
-      'しげんぶつ',
       'しげんぶつ（こし）',
       'しげんぶつ（こふ）',
       'そだいごみ',
@@ -886,6 +890,40 @@ const getCategoryIcon = (category) => {
             </div>
           </div>
         </footer>
+{/* --- ここから書き換え（強制表示テスト用） --- */}
+        <button
+          onClick={scrollToTop}
+          style={{
+            position: 'fixed',
+            right: '20px',
+            bottom: '80px',
+            zIndex: 9999,
+            backgroundColor: '#2563eb', // blue-600
+            color: 'white',
+            width: '60px',
+            height: '60px',
+            borderRadius: '9999px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+            border: '2px solid white',
+            cursor: 'pointer'
+          }}
+          aria-label="一番上にもどる"
+        >
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            strokeWidth={3} 
+            stroke="currentColor" 
+            style={{ width: '24px', height: '24px' }}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+          </svg>
+        </button>
+        
       </div>
     </div>
   );
